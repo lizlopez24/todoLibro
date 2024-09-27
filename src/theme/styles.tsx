@@ -44,5 +44,20 @@ export const styles = StyleSheet.create({
         fontSize:15,
         fontWeight:'bold',
         color:'#55a7d0'
+    },
+    modal:{
+        backgroundColor: 'white', 
+        padding: 20,
+        gap:20
+    },
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+      },
+    rootsInput:{
+        flexDirection:'row',
+        gap:15
     }
 })
