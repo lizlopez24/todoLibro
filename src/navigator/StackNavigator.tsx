@@ -8,20 +8,22 @@ import { auth } from '../config/firebaseConfig';
 import { View } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import { styles } from '../theme/styles';
+import DetailsBooksScreen from '../screen/DetailsBooksScreen';
 
 interface Routes {
   name: string,
   screen: () => JSX.Element;
+  headerShow?: boolean;
+  title?: string;
 }
 
 const Stack = createStackNavigator();
 
-const routesNoAuth: Routes[] = [
+const routes: Routes[] = [
   { name: "Login", screen: LoginScreen },
-  { name: "Registro", screen: RegisterScreen }
-]
-const routesAuth: Routes[] = [
-  { name: "Home", screen: HomeScreen }
+  { name: "Registro", screen: RegisterScreen },
+  { name: "Home", screen: HomeScreen },
+  { name: 'Detail', screen: DetailsBooksScreen, headerShow: true, title: 'Detalle de libro' }
 ]
 
 const StackNavigator = () => {
@@ -44,26 +46,16 @@ const StackNavigator = () => {
         <View style={styles.rootActivity}>
           <ActivityIndicator animating={true} size={45} />
         </View>) : (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName={isAuth ? 'Home' : 'Login'}>
           {
-            !isAuth ?
-              routesNoAuth.map((item, index) => (
-                <Stack.Screen
-                  key={index}
-                  name={item.name}
-                  options={{ headerShown: false }}
-                  component={item.screen}
-                />
-              ))
-              :
-              routesAuth.map((item, index) => (
-                <Stack.Screen
-                  key={index}
-                  name={item.name}
-                  options={{ headerShown: false }}
-                  component={item.screen}
-                />
-              ))
+            routes.map((item, index) => (
+              <Stack.Screen
+                key={index}
+                name={item.name}
+                options={{ headerShown: item.headerShow ?? false, title: item.title ?? '' }}
+                component={item.screen}
+              />
+            ))
 
           }
 

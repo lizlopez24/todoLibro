@@ -59,5 +59,25 @@ export const styles = StyleSheet.create({
     rootsInput:{
         flexDirection:'row',
         gap:15
+    },
+    rootList:{
+        marginTop:10,
+        flexDirection:'row',
+        padding:10,
+        alignItems:'center',
+        gap:25
+    },
+    rootDetails:{
+        flex:1,
+        marginHorizontal:25,
+        marginVertical:40,
+        gap:25
+    },
+    btnDetails:{
+        flexDirection:'row',
+        gap:25,
+        alignItems:'center',
+        justifyContent:'space-around',
+        marginTop:10
     }
 })

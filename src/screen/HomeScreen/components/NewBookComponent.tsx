@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import { Button, Divider, IconButton, Modal, Portal, TextInput } from 'react-native-paper'
 import { styles } from '../../../theme/styles'
 import { push, ref, set } from "firebase/database";
-import { database } from '../../../config/firebaseConfig';
+import { auth, database } from '../../../config/firebaseConfig';
 
 
 interface Props {
@@ -31,7 +31,7 @@ const NewBookComponent = ({ showModal, setShowModal }: Props) => {
 
   const handleRegisterBook = async () => {
     console.log(formbook)
-    const dbBooks = ref(database, 'producto/')
+    const dbBooks = ref(database, 'producto/' + auth.currentUser?.uid)
     const saveBook = push(dbBooks)
     try {
       await set(saveBook, formbook);

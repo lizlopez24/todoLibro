@@ -46,7 +46,7 @@ const LoginScreen = () => {
         }
         try {
             const response = await signInWithEmailAndPassword(auth, formUsuario.email, formUsuario.password);
-            console.log(response)
+            navigation.dispatch(CommonActions.navigate({name:'Home'}))
         } catch (e) {
             console.log(e)
             setmessage({
@@ -79,7 +79,9 @@ const LoginScreen = () => {
                 mode='outlined'
                 placeholder='Ingrese su contraseña'
                 secureTextEntry={hiddenPassword}
-                right={<TextInput.Icon icon="eye" onPress={() => setHiddenPassword(!hiddenPassword)} />}
+                onChangeText={(value)=>setHandleValues("password",value)}
+                right={<TextInput.Icon icon="eye" 
+                onPress={() => setHiddenPassword(!hiddenPassword)} />}
             />
             <Button mode="contained" onPress={handleLogin}  theme={{ colors: { primary: 'turquoise' } }}>
                 Iniciar Sesión
